@@ -49,34 +49,28 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#team">Team</a></li>
-          <li class="drop-down"><a href="">Drop Down</a>
+          <li class="active"><a href="index.html">Inicio</a></li>
+          <li><a href="#about">Nosotros</a></li>
+          <li><a href="#team">Equipo</a></li>
+          <li class="drop-down"><a href="">Intranet</a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="drop-down"><a href="#">Deep Drop Down</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+                @if (Route::has('login'))
+                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    @auth
+                        <li><a href="{{ url('/home') }}">Inicio</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}">Ingresar</a></li>
+
+                        @if (Route::has('register'))
+                            <li><a href="{{ route('register') }}">Registrarse</a></li>
+                        @endif
+                    @endauth
+                </div>
+                @endif
             </ul>
           </li>
-          <li><a href="#contact">Contact</a></li>
-
         </ul>
       </nav><!-- .nav-menu -->
-
-      <a href="#about" class="get-started-btn">Get Started</a>
 
     </div>
   </header>
