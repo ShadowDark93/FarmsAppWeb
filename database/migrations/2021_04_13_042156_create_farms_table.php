@@ -22,7 +22,7 @@ class CreateFarmsTable extends Migration
             $table->string('Location');
             $table->string('Phone')->nullable();
             $table->timestamps();
-            $table->char('state')->default("1");
+            $table->char('state')->default("0");
         });
     }
 

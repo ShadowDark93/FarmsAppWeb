@@ -41,6 +41,17 @@
                         </div>
 
                         <div class="form-group row">
+                            <div class="col-md-6">
+                                <input id="person_types_id" type="hidden" class="form-control @error('person_types_id') is-invalid @enderror" name="person_types_id" value="3">
+                                @error('person_types_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
