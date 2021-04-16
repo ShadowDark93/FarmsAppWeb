@@ -25,7 +25,9 @@ class FarmController extends Controller
      */
     public function index()
     {
-        //
+        $farms = Farm::all();
+
+        return view('farm.index', compact('farms'));
     }
 
     /**

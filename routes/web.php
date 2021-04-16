@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FarmController;
+use App\Http\Controllers\InventoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('inventario', InventoryController::class)->names('inventario');
+
+Route::resource('farm', FarmController::class)->names('farm');
