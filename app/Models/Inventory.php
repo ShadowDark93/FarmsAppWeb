@@ -9,8 +9,8 @@ class Inventory extends Model
 {
     use HasFactory;
 
-    public function Farm(){
-        return $this->belongsTo(Farm::class);
+    public function farm(){
+        return $this->belongsTo(Farm::class, 'farms_id');
     }
 
 }

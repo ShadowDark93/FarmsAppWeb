@@ -18,7 +18,7 @@ class CreateFarmsTable extends Migration
             $table->id();
             $table->foreignId('users_id')->references('id')->on('users');
             $table->string('AdminName')->nullable();
-            $table->string('mName');
+            $table->string('Name');
             $table->string('Location');
             $table->string('Phone')->nullable();
             $table->timestamps();

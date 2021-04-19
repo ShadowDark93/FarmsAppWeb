@@ -14,8 +14,10 @@ class CreateInventoriesTable extends Migration
     public function up()
     {
         Schema::create('inventories', function (Blueprint $table) {
+            $table->engine="InnoDB";
             $table->id();
             $table->foreignId('farms_id')->references('id')->on('farms');
+            $table->foreignId('users_id')->references('id')->on('users');
             $table->string('InternalCode')->nullable();
             $table->string('Category')->nullable();
             $table->char('Sex');

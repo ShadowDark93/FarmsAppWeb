@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Farm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FarmController extends Controller
 {
@@ -25,9 +26,10 @@ class FarmController extends Controller
      */
     public function index()
     {
-        $farms = Farm::all();
+        $farms = Farm::all()->where('users_id', Auth()->user()->id);
+        $count=$farms->count();
 
-        return view('farm.index', compact('farms'));
+        return view('farm.index', compact('farms', 'count'));
     }
 
     /**

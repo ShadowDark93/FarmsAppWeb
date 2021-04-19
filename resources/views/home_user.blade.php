@@ -25,34 +25,49 @@
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-bordered table-responsive{-sm|-md|-lg|-xl}">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Nombre Finca</th>
-                                    <th scope="col">Nombre Administracion</th>
-                                    <th scope="col">Ubicación</th>
-                                    <th scope="col">Teléfono</th>
-                                    <th scope="col">Operaciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($farms as $farm)
-                                    <tr>
-                                        <th scope="row">{{ $farm->id }}</th>
-                                        <td>{{ $farm->mName }}</td>
-                                        <td>{{ $farm->AdminName }}</td>
-                                        <td>{{ $farm->Location }}</td>
-                                        <td>{{ $farm->Phone }}</td>
-                                        
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
 
+                        @if (Auth()->user()->estado == 1)
+                            <div class="cotainer">
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <div class="card text-center">
+                                            <div class="card-header alert-dark">
+                                                Propiedades
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    Actualmente posee {{ $propiedades }} propiedades.
+                                                </p>
+                                                <a href="{{ route('farm.index') }}" class="btn btn-primary">Ir a las propiedades.</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm">
+                                        <div class="card text-center ">
+                                            <div class="card-header alert-dark">
+                                                Inventario
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    Actualmente posee {{ $inventario }} animales.
+                                                </p>
+                                                <a href="{{ route('inventario.index') }}" class="btn btn-primary">Ir al inventario</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
+                @else
+                    <div class="alert alert-warning" role="alert">
+                        Estamos procesando su solicitud para poder ingresar su informacion.
+                        Por favor sea paciente!.
+                    </div>
+                    @endif
+
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

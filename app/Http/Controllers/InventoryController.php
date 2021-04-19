@@ -26,7 +26,7 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $data = Inventory::all();
+        $data = Inventory::all()->where('users_id', Auth()->user()->id);
 
         return view('inventory.index', compact('data'));
     }
