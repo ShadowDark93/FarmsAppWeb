@@ -1,7 +1,6 @@
 @extends('layouts.plantilla')
 
 @section('contenido')
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -33,17 +32,6 @@
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6">
-                                <input id="person_types_id" type="hidden" class="form-control @error('person_types_id') is-invalid @enderror" name="person_types_id" value="3">
-                                @error('person_types_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

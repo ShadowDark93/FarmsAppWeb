@@ -23,6 +23,22 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/home/activate/{id}', [App\Http\Controllers\HomeController::class, 'activarUser'])->name('home.activate');
+
+Route::get('/home/desactivate/{id}', [App\Http\Controllers\HomeController::class, 'desactivarUser'])->name('home.desactivate');
+
 Route::resource('inventario', InventoryController::class)->names('inventario');
 
 Route::resource('farm', FarmController::class)->names('farm');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
