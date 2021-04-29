@@ -38,7 +38,7 @@ class HomeController extends Controller
         if ($auth == '1' or $auth == '2') {
             return view('admon.home_admin', compact('users'));
         } else {
-            return view('user.home_user', compact('users', 'farms', 'propiedades', 'inventario'));
+            return view('usr.home_user', compact('users', 'farms', 'propiedades', 'inventario'));
         }
     }
 

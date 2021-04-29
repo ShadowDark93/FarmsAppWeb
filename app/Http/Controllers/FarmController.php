@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Auth;
 class FarmController extends Controller
 {
 
+
+    public function __invoke()
+    {
+
+    }
+
     /**
      * Create a new controller instance.
      *
@@ -27,7 +33,7 @@ class FarmController extends Controller
     public function index()
     {
         $farms = Farm::all()->where('users_id', Auth()->user()->id);
-        $count=$farms->count();
+        $count = $farms->count();
 
         return view('farm.index', compact('farms', 'count'));
     }
@@ -39,7 +45,7 @@ class FarmController extends Controller
      */
     public function create()
     {
-        //
+        return view('farm.create');
     }
 
     /**
@@ -50,7 +56,24 @@ class FarmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'Location' => 'required',
+            'Name' => 'required',
+        ]);
+
+        $farm = new Farm();
+
+        $farm->users_id = Auth()->user()->id;
+        $farm->AdminName = $request->get('AdminName');
+        $farm->Name = $request->get('Name');
+        $farm->Location = $request->get('Location');
+        $farm->Phone = $request->get('Phone');
+        $farm->AdminName = $request->get('AdminName');
+
+        $farm->save();
+
+        return redirect()->route('farm.index')->with('create', 'ok');
+
     }
 
     /**
@@ -72,7 +95,7 @@ class FarmController extends Controller
      */
     public function edit(Farm $farm)
     {
-        //
+        return view('farm.edit', compact('farm'));
     }
 
     /**
@@ -84,7 +107,14 @@ class FarmController extends Controller
      */
     public function update(Request $request, Farm $farm)
     {
-        //
+        $request->validate([
+            'Location' => 'required',
+            'Name' => 'required',
+        ]);
+
+        $farm->update($request->all());
+
+        return redirect()->route('farm.index')->with('edited','ok');
     }
 
     /**
@@ -96,5 +126,21 @@ class FarmController extends Controller
     public function destroy(Farm $farm)
     {
         //
+    }
+
+    public function disable($id){
+        $farm = Farm::FindOrFail($id);
+        $farm->state='0';
+        $farm->save();
+
+        return redirect()->route('farm.index')->with('disable','ok');
+    }
+
+    public function enable($id){
+        $farm = Farm::FindOrFail($id);
+        $farm->state='1';
+        $farm->save();
+
+        return redirect()->route('farm.index')->with('enable','ok');
     }
 }

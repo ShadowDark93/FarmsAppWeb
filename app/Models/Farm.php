@@ -12,4 +12,12 @@ class Farm extends Model
     public function Inventories(){
         return $this->hasMany(Inventory::class);
     }
+
+    protected $fillable = [
+        'user_id',
+        'AdminName',
+        'Name',
+        'Location',
+        'Phone',
+    ];
 }

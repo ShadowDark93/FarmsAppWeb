@@ -9,65 +9,92 @@
 @endsection
 
 @section('contenido')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav mr-auto">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('home') }}">Inicio <span
-                                                class="sr-only">(current)</span></a>
-                                    </li>
-                                    <li class="nav-item active">
-                                        <a class="nav-link" href="{{ route('farm.index') }}">Granjas</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('inventario.index') }}">Inventario</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
 
-                    <div class="card-body">
-                        @if ($count > 0)
-                            <table class="table table-condensed table-bordered table-striped" id="personas">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Nombre Administrador</th>
-                                        <th scope="col">Ubicación</th>
-                                        <th scope="col">Teléfono</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($farms as $farm)
-                                        <tr>
-                                            <th scope="row">{{ $farm->id }}</th>
-                                            <td>{{ $farm->Name }}</td>
-                                            <td>
-                                                @if ($farm->AdminName)
-                                                    {{ $farm->AdminName }}
-                                                @else
-                                                    Sin Administrador
-                                                @endif
-                                            </td>
-                                            <td>{{ $farm->Location }}</td>
-                                            <td>{{ $farm->Phone }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        @else
-                            <div class="alert alert-danger" role="alert">
-                                Actualmente no posee registro de propiedades.
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('home') }}">Inicio <span
+                                            class="sr-only">(current)</span></a>
+                                </li>
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{{ route('farm.index') }}">Granjas</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('inventario.index') }}">Inventario</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <div class="card-body">
+                    <div class="col-sm mb-3">
+                        <div class="row">
+                            <div>
+                                <a href="{{ route('farm.create') }}" class="btn btn-success float-right">Agregar</a>
                             </div>
-                        @endif
+                        </div>
                     </div>
+                    @if ($count > 0)
+                        <table class="table table-condensed table-bordered table-striped" id="personas">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Nombre Administrador</th>
+                                    <th scope="col">Ubicación</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Operaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($farms as $farm)
+                                    <tr>
+                                        <th scope="row">{{ $farm->Name }}</th>
+                                        <td>
+                                            @if ($farm->AdminName)
+                                                {{ $farm->AdminName }}
+                                            @else
+                                                Sin Administrador
+                                            @endif
+                                        </td>
+                                        <td>{{ $farm->Location }}</td>
+                                        <td>
+                                            @if ($farm->Phone)
+                                                {{ $farm->Phone }}
+                                            @else
+                                                Sin Teléfono
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <a href="{{ route('farm.edit', $farm->id) }}"
+                                                        class="btn btn-primary">Editar</a>
+
+                                                    @if ($farm->state == '1')
+                                                        <a href="{{ route('farm.disable', $farm->id) }}"
+                                                            class="btn btn-danger mx-2">Desactivar</a>
+                                                    @else
+                                                        <a href="{{ route('farm.enable', $farm->id) }}"
+                                                            class="btn btn-success mx-2">Activar</a>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @else
+                        <div class="alert alert-danger" role="alert">
+                            Actualmente no posee registro de propiedades.
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -79,6 +106,8 @@
     <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap4.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.16.6/dist/sweetalert2.all.min.js"></script>
 
     <script>
         $('#personas').DataTable({
@@ -101,17 +130,28 @@
 
     </script>
 
-    @if (session('enable') == 'ok')
+    @if (session('create') == 'ok')
         <script>
             Swal.fire({
                 icon: 'success',
                 position: 'center',
                 icon: 'success',
-                title: 'El usuario ha sido activado',
+                title: 'La finca se ha creado de manera correcta',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
             })
+        </script>
+    @endif
 
+    @if (session('edited') == 'ok')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'La finca ha sido editada',
+                showConfirmButton: false,
+                timer: 3000
+            })
         </script>
     @endif
 
@@ -119,12 +159,23 @@
         <script>
             Swal.fire({
                 position: 'center',
-                icon: 'success',
-                title: 'El usuario ha sido deshabilitado',
+                icon: 'error',
+                title: 'La finca ha sido deshabilitada',
                 showConfirmButton: false,
-                timer: 1500
+                timer: 3000
             })
+        </script>
+    @endif
 
+    @if (session('enable') == 'ok')
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'La finca ha sido habilitada',
+                showConfirmButton: false,
+                timer: 3000
+            })
         </script>
     @endif
 

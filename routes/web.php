@@ -30,15 +30,5 @@ Route::get('/home/desactivate/{id}', [App\Http\Controllers\HomeController::class
 Route::resource('inventario', InventoryController::class)->names('inventario');
 
 Route::resource('farm', FarmController::class)->names('farm');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/farm/disable/{id}', 'App\Http\Controllers\FarmController@disable')->name('farm.disable');
+Route::get('/farm/enable/{id}', 'App\Http\Controllers\FarmController@enable')->name('farm.enable');
