@@ -24,7 +24,7 @@ class CreateInventoriesTable extends Migration
             $table->char('Third')->default('0');
             $table->string('ThirdName')->nullable();
             $table->timestamps();
-            $table->char('state')->default('1');
+            $table->char('state')->default('1')->nullable();
         });
     }
 

@@ -24,7 +24,7 @@
                                 <li class="nav-item active">
                                     <a class="nav-link" href="{{ route('farm.index') }}">Granjas</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item ">
                                     <a class="nav-link" href="{{ route('inventario.index') }}">Inventario</a>
                                 </li>
                             </ul>
@@ -140,6 +140,7 @@
                 showConfirmButton: false,
                 timer: 3000
             })
+
         </script>
     @endif
 
@@ -152,6 +153,7 @@
                 showConfirmButton: false,
                 timer: 3000
             })
+
         </script>
     @endif
 
@@ -164,6 +166,7 @@
                 showConfirmButton: false,
                 timer: 3000
             })
+
         </script>
     @endif
 
@@ -176,6 +179,7 @@
                 showConfirmButton: false,
                 timer: 3000
             })
+
         </script>
     @endif
 

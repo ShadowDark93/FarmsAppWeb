@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Farm;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Return_;
 
 class InventoryController extends Controller
 {
@@ -38,7 +40,8 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        //
+        $farms=Farm::all()->where('users_id', Auth()->user()->id);
+        return view('inventory.create', compact('farms'));
     }
 
     /**
@@ -47,9 +50,18 @@ class InventoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Inventory $inventory)
     {
-        //
+        $request->validate([
+            'InternalCode'=>'required',
+            'Category'=>'required',
+            'Third'=>'required',
+        ]);
+
+        $inventory=Inventory::create($request->all());
+
+        return redirect()->route('inventario.index')->with('created','ok');
+
     }
 
     /**
@@ -71,7 +83,7 @@ class InventoryController extends Controller
      */
     public function edit(Inventory $inventory)
     {
-        //
+        return view('inventory.edit');
     }
 
     /**

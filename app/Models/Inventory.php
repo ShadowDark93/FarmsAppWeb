@@ -13,4 +13,14 @@ class Inventory extends Model
         return $this->belongsTo(Farm::class, 'farms_id');
     }
 
+    protected $fillable = [
+        'farms_id',
+        'users_id',
+        'InternalCode',
+        'Category',
+        'Sex',
+        'Third',
+        'ThirdName',
+    ];
+
 }
