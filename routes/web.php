@@ -32,3 +32,4 @@ Route::resource('inventario', InventoryController::class)->names('inventario');
 Route::resource('farm', FarmController::class)->names('farm');
 Route::get('/farm/disable/{id}', 'App\Http\Controllers\FarmController@disable')->name('farm.disable');
 Route::get('/farm/enable/{id}', 'App\Http\Controllers\FarmController@enable')->name('farm.enable');
+

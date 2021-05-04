@@ -35,24 +35,24 @@
                     </div>
 
                     @if ($data->count() > 0)
-                        <table id="inventario" class="table table-striped table-hover table-bordered table-responsive{-sm|-md|-lg|-xl|-xxl">
+                        <table id="inventario"
+                            class="table table-striped table-hover table-bordered table-responsive{-sm|-md|-lg|-xl|-xxl">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Codigo Interno</th>
+                                    <th scope="col">Código Interno</>
                                     <th scope="col">Ubicación</th>
                                     <th scope="col">Categoría</th>
                                     <th scope="col">Sexo</th>
                                     <th scope="col">Tercerizado</th>
                                     <th scope="col">Nombre Tercero</th>
+                                    <th scope="col">Estado</th>
                                     <th scope="col">Operaciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($data as $d)
                                     <tr>
-                                        <th scope="row">{{ $d->id }}</th>
-                                        <td>{{ $d->InternalCode }}</td>
+                                        <th scope="row">{{ $d->InternalCode }}</th>
                                         <td>{{ $d->farm->Name }}</td>
                                         <td>{{ $d->Category }}</td>
                                         <td>{{ $d->Sex }}</td>
@@ -70,7 +70,28 @@
                                                 No aplica.
                                             @endif
                                         </td>
-                                        <td></td>
+                                        <td>
+                                            @if ($d->state == 1)
+                                                Activo
+                                            @elseif($d->state==2)
+                                                Vendido
+                                            @elseif($d->state==3)
+                                                Trasladado
+                                            @elseif($d->state==0)
+                                                Muerto
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if($d->state==0)
+                                                <span class="badge badge-danger">No se puede modificar el dato</span>
+                                            @else
+                                                <a href="{{ route('inventario.edit', $d->id) }}"
+                                                class="btn btn-primary">Editar</a>
+                                            @endif
+
+
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

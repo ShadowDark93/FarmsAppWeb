@@ -6,7 +6,6 @@ use App\Models\Farm;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use PhpParser\Node\Stmt\Return_;
 
 class InventoryController extends Controller
 {
@@ -40,7 +39,7 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        $farms=Farm::all()->where('users_id', Auth()->user()->id);
+        $farms = Farm::all()->where('users_id', Auth()->user()->id);
         return view('inventory.create', compact('farms'));
     }
 
@@ -53,14 +52,14 @@ class InventoryController extends Controller
     public function store(Request $request, Inventory $inventory)
     {
         $request->validate([
-            'InternalCode'=>'required',
-            'Category'=>'required',
-            'Third'=>'required',
+            'InternalCode' => 'required',
+            'Category' => 'required',
+            'Third' => 'required',
         ]);
 
-        $inventory=Inventory::create($request->all());
+        $inventory = Inventory::create($request->all());
 
-        return redirect()->route('inventario.index')->with('created','ok');
+        return redirect()->route('inventario.index')->with('created', 'ok');
 
     }
 
@@ -81,9 +80,13 @@ class InventoryController extends Controller
      * @param  \App\Models\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Inventory $inventory)
+    public function edit($id)
     {
-        return view('inventory.edit');
+        $inventory = Inventory::findorfail($id);
+        $farms = Farm::all()->where('users_id', Auth()->user()->id);
+
+        return view('inventory.edit', compact('inventory', 'farms'));
+
     }
 
     /**
@@ -93,9 +96,26 @@ class InventoryController extends Controller
      * @param  \App\Models\Inventory  $inventory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Inventory $inventory)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'InternalCode' => 'required',
+            'Category' => 'required',
+            'Third' => 'required',
+        ]);
+
+        $inventory = Inventory::find($id);
+        $inventory->InternalCode=$request->get('InternalCode');
+        $inventory->farms_id=$request->get('farms_id');
+        $inventory->Category=$request->get('Category');
+        $inventory->Sex=$request->get('Sex');
+        $inventory->Third=$request->get('Third');
+        $inventory->ThirdName=$request->get('ThirdName');
+        $inventory->state=$request->get('state');
+        $inventory->save();
+
+        return redirect()->route('inventario.index')->with('edited','ok');
+
     }
 
     /**
