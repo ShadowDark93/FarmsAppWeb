@@ -84,6 +84,9 @@
                                                 No aplica.
                                             @endif
                                         </td>
+
+                                        <td id="Peso">{{ $d->Peso }}</td>
+                                        <td id="valor">{{ $d->valor }}</td>
                                         <td>
                                             @if ($d->state == 1)
                                                 Activo
@@ -95,8 +98,6 @@
                                                 Muerto
                                             @endif
                                         </td>
-                                        <td id="Peso">{{ $d->Peso }}</td>
-                                        <td id="valor">{{ $d->valor }}</td>
                                         <td>
                                             @if ($d->state == 0)
                                                 <span class="badge badge-danger">No se puede modificar el dato</span>
