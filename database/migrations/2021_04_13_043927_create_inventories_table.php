@@ -23,8 +23,10 @@ class CreateInventoriesTable extends Migration
             $table->char('Sex');
             $table->char('Third')->default('0');
             $table->string('ThirdName')->nullable();
+            $table->double('Peso');
+            $table->double('valor');
             $table->timestamps();
-            $table->char('state')->default('1')->nullable();
+            $table->char('state')->default('1');
         });
     }
 

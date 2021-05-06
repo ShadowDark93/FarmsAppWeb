@@ -45,6 +45,8 @@
                                     <th scope="col">Sexo</th>
                                     <th scope="col">Tercerizado</th>
                                     <th scope="col">Nombre Tercero</th>
+                                    <th scope="col">Peso</th>
+                                    <th scope="col">Valor</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Operaciones</th>
                                 </tr>
@@ -54,7 +56,19 @@
                                     <tr>
                                         <th scope="row">{{ $d->InternalCode }}</th>
                                         <td>{{ $d->farm->Name }}</td>
-                                        <td>{{ $d->Category }}</td>
+                                        <td>
+                                            @if ($d->Category == '1')
+                                                Ganado vacuno o bovino
+                                            @elseif($d->Category=='2')
+                                                Ganado aviar
+                                            @elseif($d->Category=='3')
+                                                Ganado equino
+                                            @elseif($d->Category=='4')
+                                                Ganado porcino
+                                            @elseif($d->Category=='5')
+                                                Ganado ovino
+                                            @endif
+                                        </td>
                                         <td>{{ $d->Sex }}</td>
                                         <td>
                                             @if ($d->third == 1)
@@ -81,16 +95,15 @@
                                                 Muerto
                                             @endif
                                         </td>
-
+                                        <td id="Peso">{{ $d->Peso }}</td>
+                                        <td id="valor">{{ $d->valor }}</td>
                                         <td>
-                                            @if($d->state==0)
+                                            @if ($d->state == 0)
                                                 <span class="badge badge-danger">No se puede modificar el dato</span>
                                             @else
                                                 <a href="{{ route('inventario.edit', $d->id) }}"
-                                                class="btn btn-primary">Editar</a>
+                                                    class="btn btn-primary">Editar</a>
                                             @endif
-
-
                                         </td>
                                     </tr>
                                 @endforeach
@@ -189,5 +202,38 @@
 
         </script>
     @endif
+
+    {{-- auto colocar miles --}}
+    <script>
+        $("#valor").on({
+            "focus": function(event) {
+                $(event.target).select();
+            },
+            "keyup": function(event) {
+                $(event.target).val(function(index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });
+
+    </script>
+
+    <script>
+        $("#Peso").on({
+            "focus": function(event) {
+                $(event.target).select();
+            },
+            "keyup": function(event) {
+                $(event.target).val(function(index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });
+
+    </script>
 
 @endsection

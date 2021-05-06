@@ -1,5 +1,18 @@
 @extends('layouts.plantilla')
 
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+</style>
+
 @section('contenido')
 
     <div class="row justify-content-center">
@@ -48,7 +61,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('Category', 'Digite la especie del animal', ['class' => 'form-label']) !!}
-                        {!! Form::text('Category', null, ['class' => 'form-control', 'placeholder' => 'Especie']) !!}
+                        {!! Form::select('Category', ['1'=>'Ganado vacuno o bovino', '2'=>'Ganado aviar','3'=>'Ganado equino','4'=>'Ganado porcino','5'=>'Ganado ovino'], null, ['class' => 'form-control']) !!}
                         @error('Category')
                             <span class="text-danger">Este campo es requerido</span>
                         @enderror
@@ -78,6 +91,22 @@
                         @enderror
                     </div>
 
+                    <div class="form-group mb-3">
+                        {!! Form::label('Peso', 'Digite el peso del animal en KG', ['class' => 'form-label']) !!}
+                        {!! Form::text('Peso', null, ['class' => 'form-control', 'placeholder' => 'Peso del animal']) !!}
+                        @error('Peso')
+                            <span class="text-danger">Este campo es requerido</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {!! Form::label('valor', 'Digite el valor comercial del animal', ['class' => 'form-label']) !!}
+                        {!! Form::number('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor comercial']) !!}
+                        @error('valor')
+                            <span class="text-danger">Este campo es requerido</span>
+                        @enderror
+                    </div>
+
                     <div>
                         <a href="{{ route('inventario.index') }}" class="btn btn-info">Volver</a>
 
@@ -89,5 +118,42 @@
             </div>
         </div>
     </div>
+
+@endsection
+
+@section('js')
+
+        {{-- auto colocar miles --}}
+    <script>
+        $("#valor").on({
+            "focus": function(event) {
+                $(event.target).select();
+            },
+            "keyup": function(event) {
+                $(event.target).val(function(index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });
+
+    </script>
+
+    <script>
+        $("#Peso").on({
+            "focus": function(event) {
+                $(event.target).select();
+            },
+            "keyup": function(event) {
+                $(event.target).val(function(index, value) {
+                    return value.replace(/\D/g, "")
+                        .replace(/([0-9])([0-9]{2})$/, '$1.$2')
+                        .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ",");
+                });
+            }
+        });
+
+    </script>
 
 @endsection

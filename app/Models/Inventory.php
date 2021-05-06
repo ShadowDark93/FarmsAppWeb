@@ -21,6 +21,8 @@ class Inventory extends Model
         'Sex',
         'Third',
         'ThirdName',
+        'Peso',
+        'valor'
     ];
 
 }
