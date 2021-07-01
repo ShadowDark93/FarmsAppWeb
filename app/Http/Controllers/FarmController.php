@@ -95,7 +95,7 @@ class FarmController extends Controller
      */
     public function edit(Farm $farm)
     {
-        return view('farm.edit', compact('farm'));
+            return view('farm.edit', compact('farm'));
     }
 
     /**

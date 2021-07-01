@@ -76,13 +76,13 @@
                                                     <a href="{{ route('farm.edit', $farm->id) }}"
                                                         class="btn btn-primary">Editar</a>
 
-                                                    @if ($farm->state == '1')
+                                                    {{-- @if ($farm->state == '1')
                                                         <a href="{{ route('farm.disable', $farm->id) }}"
                                                             class="btn btn-danger mx-2">Desactivar</a>
                                                     @else
                                                         <a href="{{ route('farm.enable', $farm->id) }}"
                                                             class="btn btn-success mx-2">Activar</a>
-                                                    @endif
+                                                    @endif --}}
                                                 </div>
                                             </div>
                                         </td>
