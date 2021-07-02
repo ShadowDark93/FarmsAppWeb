@@ -28,16 +28,20 @@ class HomeController extends Controller
     {
 
         $auth = Auth()->user()->person_types_id;
-        $users = User::all();
+        $superadmin = User::all();
+        $users = User::all()->where('person_types_id',3);
         $farms = Farm::all()->where('users_id', Auth()->user()->id);
         $invent = Inventory::all()->where('users_id', Auth()->user()->id);
 
         $propiedades = $farms->count();
         $inventario = $invent->count();
 
-        if ($auth == '1' or $auth == '2') {
+        if ($auth == '1') {
+            $users = $superadmin;
             return view('admon.home_admin', compact('users'));
-        } else {
+        } elseif( $auth == '2') {
+            return view('admon.home_admin', compact('users', 'farms', 'propiedades', 'inventario'));
+        }else {
             return view('usr.home_user', compact('users', 'farms', 'propiedades', 'inventario'));
         }
     }
