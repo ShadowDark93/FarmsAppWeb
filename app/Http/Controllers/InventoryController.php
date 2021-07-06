@@ -55,8 +55,6 @@ class InventoryController extends Controller
             'InternalCode' => 'required',
             'Category' => 'required',
             'Third' => 'required',
-            'Peso' => 'required',
-            'valor' => 'required',
         ]);
 
         $inventory = Inventory::create($request->all());
@@ -103,9 +101,7 @@ class InventoryController extends Controller
         $request->validate([
             'InternalCode' => 'required',
             'Category' => 'required',
-            'Third' => 'required',
-            'Peso' => 'required',
-            'valor' => 'required',
+            'Third' => 'required'
         ]);
 
         $inventory = Inventory::find($id);
@@ -115,8 +111,6 @@ class InventoryController extends Controller
         $inventory->Sex=$request->get('Sex');
         $inventory->Third=$request->get('Third');
         $inventory->ThirdName=$request->get('ThirdName');
-        $inventory->Peso=$request->get('Peso');
-        $inventory->valor=$request->get('valor');
         $inventory->state=$request->get('state');
         $inventory->save();
 

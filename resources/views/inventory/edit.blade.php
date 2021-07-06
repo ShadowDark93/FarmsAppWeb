@@ -92,22 +92,6 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        {!! Form::label('Peso', 'Digite el peso del animal', ['class' => 'form-label']) !!}
-                        {!! Form::text('Peso', null, ['class' => 'form-control', 'placeholder' => 'Peso del animal - Usar punto para decimales']) !!}
-                        @error('Peso')
-                            <span class="text-danger">Este campo es requerido</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        {!! Form::label('valor', 'Digite el valor comercial del animal', ['class' => 'form-label']) !!}
-                        {!! Form::number('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor del animal - Usar punto para decimales']) !!}
-                        @error('valor')
-                            <span class="text-danger">Este campo es requerido</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
                         {!! Form::label('State', 'Seleccione el estado del animal', ['class' => 'form-label']) !!}
                         {!! Form::select('state', ['1' => 'Activo', '2' => 'Vendido','0' => 'Muerto', '3' => 'Trasladado'], null, ['class' => 'form-control']) !!}
                         @error('state')

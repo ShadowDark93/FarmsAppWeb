@@ -2,19 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Peso;
 use Illuminate\Http\Request;
 
 class PesoController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $auth = Auth()->user()->id;
+        $animal = Inventory::all()->where('inventories_id', $id);
+        return view('peso.index', compact('animal'));
     }
 
     /**

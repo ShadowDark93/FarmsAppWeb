@@ -91,22 +91,6 @@
                         @enderror
                     </div>
 
-                    <div class="form-group mb-3">
-                        {!! Form::label('Peso', 'Digite el peso del animal en KG', ['class' => 'form-label']) !!}
-                        {!! Form::text('Peso', null, ['class' => 'form-control', 'placeholder' => 'Peso del animal']) !!}
-                        @error('Peso')
-                            <span class="text-danger">Este campo es requerido</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        {!! Form::label('valor', 'Digite el valor comercial del animal', ['class' => 'form-label']) !!}
-                        {!! Form::number('valor', null, ['class' => 'form-control', 'placeholder' => 'Valor comercial']) !!}
-                        @error('valor')
-                            <span class="text-danger">Este campo es requerido</span>
-                        @enderror
-                    </div>
-
                     <div>
                         <a href="{{ route('inventario.index') }}" class="btn btn-info">Volver</a>
 
