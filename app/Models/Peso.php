@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Peso extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'inventories_id',
+        'NombrePesador', 
+        'peso', 
+        'valor'
+    ];
 }

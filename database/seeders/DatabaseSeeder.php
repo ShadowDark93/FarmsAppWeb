@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
         $user->estado='1';
         $user->save();
 
+        $this->call(FarmSeeder::class);
 
     }
 }

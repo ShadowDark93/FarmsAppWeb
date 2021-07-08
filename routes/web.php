@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\PesoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,4 +35,3 @@ Route::get('/farm/disable/{id}', 'App\Http\Controllers\FarmController@disable')-
 Route::get('/farm/enable/{id}', 'App\Http\Controllers\FarmController@enable')->name('farm.enable');
 
 Route::resource('Peso', PesoController::class)->names('peso');
-

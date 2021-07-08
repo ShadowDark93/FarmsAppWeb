@@ -104,7 +104,7 @@
                                             @else
                                                 <a href="{{ route('inventario.edit', $d->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('peso.index') }}" class="btn btn-secondary">asdf</a>
+                                                <a href="{{ route('peso.show', $d->id) }}" class="btn btn-secondary">asdf</a>
                                             @endif
                                         </td>
                                     </tr>

@@ -2,33 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventory;
 use App\Models\Peso;
 use Illuminate\Http\Request;
 
 class PesoController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index()
     {
-        $auth = Auth()->user()->id;
-        $animal = Inventory::all()->where('inventories_id', $id);
-        return view('peso.index', compact('animal'));
+        //
     }
 
     /**
@@ -40,16 +26,22 @@ class PesoController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Peso $peso)
     {
-        //
+        $request->validate([
+           'NombrePesador' => 'required',
+           'Peso' => 'required',
+           'valor' => 'required'
+        ]);
+
+        
     }
 
     /**
@@ -58,9 +50,15 @@ class PesoController extends Controller
      * @param  \App\Models\Peso  $peso
      * @return \Illuminate\Http\Response
      */
-    public function show(Peso $peso)
+    public function show($id)
     {
-        //
+        $animal = Peso::all()->where('inventories_id', $id);
+        
+        if ($animal->count()>0) {
+            return view('peso.index', compact('animal'));
+        } else {
+            return view('peso.create', compact('animal'));
+        }
     }
 
     /**
@@ -81,9 +79,9 @@ class PesoController extends Controller
      * @param  \App\Models\Peso  $peso
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Peso $peso)
+    public function update($id)
     {
-        //
+        return $id;
     }
 
     /**
@@ -96,4 +94,5 @@ class PesoController extends Controller
     {
         //
     }
+
 }
