@@ -37,11 +37,15 @@ class PesoController extends Controller
     {
         $request->validate([
            'NombrePesador' => 'required',
-           'Peso' => 'required',
+           'peso' => 'required',
            'valor' => 'required'
         ]);
 
         
+        $peso = Peso::create($request->all());
+        
+        return redirect()->route('inventario.index')->with('create','ok');
+    
     }
 
     /**
@@ -55,9 +59,10 @@ class PesoController extends Controller
         $animal = Peso::all()->where('inventories_id', $id);
         
         if ($animal->count()>0) {
-            return view('peso.index', compact('animal'));
+            return view('peso.index', compact('animal', 'id'));
+            return $animal;
         } else {
-            return view('peso.create', compact('animal'));
+            return view('peso.create', compact('id'));
         }
     }
 

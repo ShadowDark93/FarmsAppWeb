@@ -33,7 +33,7 @@
                     <div class="col-sm mb-3">
                         <div class="row">
                             <div>
-                                <a href="{{ route('peso.update', $animal->pluck('id')) }}" class="btn btn-success float-right">Agregar</a>
+                                <a href="{{ route('peso.update', $id) }}" class="btn btn-success float-right">Agregar</a>
                             </div>
                         </div>
                     </div>
@@ -43,19 +43,21 @@
                             class="table table-striped table-hover table-bordered table-responsive{-sm|-md|-lg|-xl|-xxl">
                             <thead class="table-dark">
                                 <tr>
-                                    <th scope="col">Fecha Peso</>
+                                    <th scope="col">ID</th>
                                     <th scope="col">Nombre Pesador</th>
                                     <th scope="col">Valor Comercial</th>
                                     <th scope="col">Peso KG</th>
+                                    <th scope="col">Fecha Peso</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($animal as $a)
                                     <tr>
-                                        <th scope="row">{{ $a->created_at }}</th>
+                                        <th scope="row">{{ $a->id }}</th>
                                         <td>{{ $a->NombrePesador }}</td>
                                         <td>{{ $a->valor }}</td>
-                                        <td>{{ $d->Peso }}</td>
+                                        <td>{{ $a->peso }}</td>
+                                        <td>{{ $a->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

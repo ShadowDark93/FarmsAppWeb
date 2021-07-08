@@ -9,6 +9,10 @@ class Peso extends Model
 {
     use HasFactory;
 
+    public function Inventories(){
+        return $this->hasMany(Inventory::class);
+    }
+
     protected $fillable = [
         'inventories_id',
         'NombrePesador', 

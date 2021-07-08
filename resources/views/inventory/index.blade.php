@@ -85,8 +85,8 @@
                                             @endif
                                         </td>
 
-                                        <td id="Peso">{{ $d->Peso }}</td>
-                                        <td id="valor">{{ $d->valor }}</td>
+                                        <td id="Peso">{{ $d->peso }}</td>
+                                        <td id="valor">{{ $d->peso }}</td>
                                         <td>
                                             @if ($d->state == 1)
                                                 Activo

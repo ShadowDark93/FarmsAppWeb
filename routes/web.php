@@ -4,6 +4,7 @@ use App\Http\Controllers\FarmController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PesoController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------

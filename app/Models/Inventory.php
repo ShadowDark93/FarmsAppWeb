@@ -12,6 +12,10 @@ class Inventory extends Model
     public function farm(){
         return $this->belongsTo(Farm::class, 'farms_id');
     }
+    
+    public function peso(){
+        return $this->belongsTo(Peso::class, 'inventories_id');
+    }
 
     protected $fillable = [
         'farms_id',
