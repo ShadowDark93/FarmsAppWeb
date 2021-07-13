@@ -29,15 +29,7 @@
                 </div>
 
                 <div class="card-body">
-
-                    <div class="col-sm mb-3">
-                        <div class="row">
-                            <div>
-                                <a href="{{ route('peso.createPeso', $id) }}" class="btn btn-success float-right">Agregar</a>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     @if ($animal->count() > 0)
                         <table id="inventario"
                             class="table table-striped table-hover table-bordered table-responsive{-sm|-md|-lg|-xl|-xxl">

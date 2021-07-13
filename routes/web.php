@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\FarmController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PesoController;
@@ -23,11 +24,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/home/activate/{id}', [App\Http\Controllers\HomeController::class, 'activarUser'])->name('home.activate');
+Route::get('/home/activate/{id}', [HomeController::class, 'activarUser'])->name('home.activate');
 
-Route::get('/home/desactivate/{id}', [App\Http\Controllers\HomeController::class, 'desactivarUser'])->name('home.desactivate');
+Route::get('/home/desactivate/{id}', [HomeController::class, 'desactivarUser'])->name('home.desactivate');
 
 Route::resource('inventario', InventoryController::class)->names('inventario');
 
@@ -35,4 +36,6 @@ Route::resource('farm', FarmController::class)->names('farm');
 Route::get('/farm/disable/{id}', 'App\Http\Controllers\FarmController@disable')->name('farm.disable');
 Route::get('/farm/enable/{id}', 'App\Http\Controllers\FarmController@enable')->name('farm.enable');
 
-Route::resource('Peso', PesoController::class)->names('peso');
+Route::resource('peso', PesoController::class)->names('peso');
+#Route::get('/peso/agregar/{id}', [PesoController::class, 'crearPeso']);
+Route::get('peso/agregar/{id}', [PesoController::class, 'crearPeso'])->name('peso.createPeso');

@@ -9,7 +9,7 @@ class Peso extends Model
 {
     use HasFactory;
 
-    public function Inventories(){
+    public function inventories(){
         return $this->hasMany(Inventory::class);
     }
 

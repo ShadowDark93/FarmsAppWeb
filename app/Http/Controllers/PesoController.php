@@ -7,6 +7,17 @@ use Illuminate\Http\Request;
 
 class PesoController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,11 +33,11 @@ class PesoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function crearPeso($id)
     {
-        //
+        return view('peso.create', compact('id'));
     }
-    
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,16 +47,15 @@ class PesoController extends Controller
     public function store(Request $request, Peso $peso)
     {
         $request->validate([
-           'NombrePesador' => 'required',
-           'peso' => 'required',
-           'valor' => 'required'
+            'NombrePesador' => 'required',
+            'peso' => 'required',
+            'valor' => 'required',
         ]);
 
-        
         $peso = Peso::create($request->all());
-        
-        return redirect()->route('inventario.index')->with('create','ok');
-    
+
+        return redirect()->route('inventario.index')->with('create', 'ok');
+
     }
 
     /**
@@ -57,10 +67,13 @@ class PesoController extends Controller
     public function show($id)
     {
         $animal = Peso::all()->where('inventories_id', $id);
-        
-        if ($animal->count()>0) {
-            return view('peso.index', compact('animal', 'id'));
-            return $animal;
+
+        if ($animal->count() > 0) {
+            if ($id == 0) {
+                return view('peso.index_data', compact('animal', 'id'));
+            } else {
+                return view('peso.index', compact('animal', 'id'));
+            }
         } else {
             return view('peso.create', compact('id'));
         }

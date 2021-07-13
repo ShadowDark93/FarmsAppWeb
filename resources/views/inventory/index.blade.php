@@ -45,8 +45,6 @@
                                     <th scope="col">Sexo</th>
                                     <th scope="col">Tercerizado</th>
                                     <th scope="col">Nombre Tercero</th>
-                                    <th scope="col">Peso</th>
-                                    <th scope="col">Valor</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Operaciones</th>
                                 </tr>
@@ -84,9 +82,6 @@
                                                 No aplica.
                                             @endif
                                         </td>
-
-                                        <td id="Peso">{{ $d->peso }}</td>
-                                        <td id="valor">{{ $d->peso }}</td>
                                         <td>
                                             @if ($d->state == 1)
                                                 Activo
@@ -101,10 +96,11 @@
                                         <td>
                                             @if ($d->state == 0)
                                                 <span class="badge badge-danger">No se puede modificar el dato</span>
+                                                 <a href="{{ route('peso.show', 0) }}" class="btn btn-sm btn-warning">Pesaje y Valor</a>
                                             @else
                                                 <a href="{{ route('inventario.edit', $d->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('peso.show', $d->id) }}" class="btn btn-secondary">asdf</a>
+                                                <a href="{{ route('peso.show', $d->id) }}" class="btn btn-sm btn-warning">Pesaje y Valor</a>
                                             @endif
                                         </td>
                                     </tr>
