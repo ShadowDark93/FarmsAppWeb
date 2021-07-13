@@ -65,7 +65,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('peso', 'Digite el peso del animal en Kilogramos', ['class' => 'form-label']) !!}
-                        {!! Form::number('peso', null, ['class' => 'form-control', 'any', 'placeholder' => 'Digite el peso en KG']) !!}
+                        {!! Form::number('peso', null, ['class' => 'form-control', 'step="any"', 'placeholder' => 'Digite el peso en KG']) !!}
                         @error('peso')
                             <span class="text-danger">Este campo es requerido</span>
                         @enderror

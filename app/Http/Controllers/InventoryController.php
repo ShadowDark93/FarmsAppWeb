@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Farm;
 use App\Models\Inventory;
+use App\Models\Peso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +29,8 @@ class InventoryController extends Controller
     public function index()
     {
         $data = Inventory::all()->where('users_id', Auth()->user()->id);
-
-        return view('inventory.index', compact('data'));
+        #return view('inventory.index', compact('data'));
+        $inventory = Peso::all()->where('inventories_id', Auth()->user()->id);
     }
 
     /**
