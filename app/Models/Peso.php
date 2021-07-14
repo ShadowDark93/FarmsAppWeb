@@ -15,8 +15,9 @@ class Peso extends Model
 
     protected $fillable = [
         'inventories_id',
-        'NombrePesador', 
-        'peso', 
-        'valor'
+        'NombrePesador',
+        'peso',
+        'valor',
+        'fechaPeso'
     ];
 }

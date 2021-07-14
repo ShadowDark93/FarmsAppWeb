@@ -57,7 +57,7 @@
 
                     <div class="form-group mb-3">
                         {!! Form::label('valor', 'Digite el valor comercial del animal', ['class' => 'form-label']) !!}
-                        {!! Form::number('valor', null, ['class' => 'form-control', 'any', 'placeholder' => 'Digite el valor comercial del animal']) !!}
+                        {!! Form::number('valor', null, ['class' => 'form-control', 'placeholder' => 'Digite el valor comercial del animal']) !!}
                         @error('valor')
                             <span class="text-danger">Este campo es requerido</span>
                         @enderror
@@ -67,6 +67,14 @@
                         {!! Form::label('peso', 'Digite el peso del animal en Kilogramos', ['class' => 'form-label']) !!}
                         {!! Form::number('peso', null, ['class' => 'form-control', 'step="any"', 'placeholder' => 'Digite el peso en KG']) !!}
                         @error('peso')
+                            <span class="text-danger">Este campo es requerido</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        {!! Form::label('fechaPeso', 'Digite el peso del animal en Kilogramos', ['class' => 'form-label']) !!}
+                        {!! Form::date('fechaPeso', null, ['class' => 'form-control', 'step="any"', 'placeholder' => 'Digite el peso en KG']) !!}
+                        @error('fechaPeso')
                             <span class="text-danger">Este campo es requerido</span>
                         @enderror
                     </div>

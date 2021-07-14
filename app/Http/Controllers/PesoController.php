@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Peso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PesoController extends Controller
 {
@@ -50,6 +51,7 @@ class PesoController extends Controller
             'NombrePesador' => 'required',
             'peso' => 'required',
             'valor' => 'required',
+            'fechaPeso' => 'required',
         ]);
 
         $peso = Peso::create($request->all());
@@ -66,13 +68,19 @@ class PesoController extends Controller
      */
     public function show($id)
     {
-        $animal = Peso::all()->where('inventories_id', $id);
+        # $animal = Peso::all()->where('inventories_id', $id);
+        $animal = DB::table('pesos')
+                  ->orderBy('id', 'asc')
+                  ->get();
 
         if ($animal->count() > 0) {
             if ($id == 0) {
+                # retorna plantilla para agregar mas pesos
                 return view('peso.index_data', compact('animal', 'id'));
             } else {
-                return view('peso.index', compact('animal', 'id'));
+                # retorna plantilla para visualizar solo datos
+                # return view('peso.index', compact('animal', 'id'));
+                return $animal;
             }
         } else {
             return view('peso.create', compact('id'));

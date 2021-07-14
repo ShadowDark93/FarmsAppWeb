@@ -57,7 +57,7 @@
                                         <td>{{ $a->NombrePesador }}</td>
                                         <td>{{ $a->valor }}</td>
                                         <td>{{ $a->peso }}</td>
-                                        <td>{{ $a->created_at }}</td>
+                                        <td>{{ $a->fechaPeso }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

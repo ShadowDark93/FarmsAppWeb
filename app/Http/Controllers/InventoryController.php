@@ -7,6 +7,7 @@ use App\Models\Inventory;
 use App\Models\Peso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InventoryController extends Controller
 {
@@ -29,8 +30,15 @@ class InventoryController extends Controller
     public function index()
     {
         $data = Inventory::all()->where('users_id', Auth()->user()->id);
-        #return view('inventory.index', compact('data'));
-        $inventory = Peso::all()->where('inventories_id', Auth()->user()->id);
+        #Suma del inventario
+        $total = DB::table('farms')
+                     ->join('inventories', 'farms.id','=', 'inventories.farms_id')
+                     ->join('pesos', 'inventories.id', '=', 'pesos.inventories_id')
+                     ->where('farms.users_id', Auth()->user()->id)
+                     ->where('inventories.state','1')
+                     ->sum('pesos.valor');
+
+        return view('inventory.index', compact('data', 'total'));
     }
 
     /**

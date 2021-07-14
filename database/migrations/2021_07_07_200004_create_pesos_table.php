@@ -19,6 +19,7 @@ class CreatePesosTable extends Migration
             $table->double('peso');
             $table->double('valor');
             $table->string('NombrePesador');
+            $table->string('fechaPeso');
             $table->timestamps();
         });
     }

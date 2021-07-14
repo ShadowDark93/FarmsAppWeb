@@ -28,10 +28,17 @@
 
                     <div class="col-sm mb-3">
                         <div class="row">
-                            <div>
-                                <a href="{{ route('inventario.create') }}" class="btn btn-success float-right">Agregar</a>
+                            <div class="sm-6">
+                                <h4 style="color:green" class="float-right"> Valor total inventario: <span>{{ $total }}</span></h4>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="sm-6">
+                                <a href="{{ route('inventario.create') }}" class="btn btn-success float-left">Agregar</a>
+                            </div>
+                        </div>
+
                     </div>
 
                     @if ($data->count() > 0)

@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="card-body">
-                    
+
                     @if ($animal->count() > 0)
                         <table id="inventario"
                             class="table table-striped table-hover table-bordered table-responsive{-sm|-md|-lg|-xl|-xxl">
@@ -49,7 +49,7 @@
                                         <td>{{ $a->NombrePesador }}</td>
                                         <td>{{ $a->valor }}</td>
                                         <td>{{ $a->peso }}</td>
-                                        <td>{{ $a->created_at }}</td>
+                                        <td>{{ $a->fechaPeso }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
