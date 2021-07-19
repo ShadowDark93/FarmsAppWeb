@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inventory;
 use App\Models\Peso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -56,6 +57,11 @@ class PesoController extends Controller
 
         $peso = Peso::create($request->all());
 
+        $inventory = Inventory::Find($request->inventories_id);
+        $inventory->valor = $request->get('valor');
+        $inventory->peso = $request->get('peso');
+        $inventory->update();
+
         return redirect()->route('inventario.index')->with('create', 'ok');
 
     }
@@ -68,19 +74,16 @@ class PesoController extends Controller
      */
     public function show($id)
     {
-        # $animal = Peso::all()->where('inventories_id', $id);
-        $animal = DB::table('pesos')
-                  ->orderBy('id', 'asc')
-                  ->get();
-
+        $animal = Peso::all()->where('inventories_id', $id);
+        
         if ($animal->count() > 0) {
             if ($id == 0) {
                 # retorna plantilla para agregar mas pesos
                 return view('peso.index_data', compact('animal', 'id'));
             } else {
-                # retorna plantilla para visualizar solo datos
-                # return view('peso.index', compact('animal', 'id'));
-                return $animal;
+                #retorna plantilla para visualizar solo datos
+                return view('peso.index', compact('animal', 'id'));
+                
             }
         } else {
             return view('peso.create', compact('id'));

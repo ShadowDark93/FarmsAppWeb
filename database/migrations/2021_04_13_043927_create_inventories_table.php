@@ -22,6 +22,8 @@ class CreateInventoriesTable extends Migration
             $table->string('Category')->nullable();
             $table->char('Sex');
             $table->char('Third')->default('0');
+            $table->double('peso')->nullable();
+            $table->double('valor')->nullable();
             $table->string('ThirdName')->nullable();
             $table->timestamps();
             $table->char('state')->default('1');

@@ -25,9 +25,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::get('/home/activate/{id}', [HomeController::class, 'activarUser'])->name('home.activate');
-
 Route::get('/home/desactivate/{id}', [HomeController::class, 'desactivarUser'])->name('home.desactivate');
 
 Route::resource('inventario', InventoryController::class)->names('inventario');
@@ -37,5 +35,4 @@ Route::get('/farm/disable/{id}', 'App\Http\Controllers\FarmController@disable')-
 Route::get('/farm/enable/{id}', 'App\Http\Controllers\FarmController@enable')->name('farm.enable');
 
 Route::resource('peso', PesoController::class)->names('peso');
-#Route::get('/peso/agregar/{id}', [PesoController::class, 'crearPeso']);
 Route::get('peso/agregar/{id}', [PesoController::class, 'crearPeso'])->name('peso.createPeso');

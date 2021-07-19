@@ -29,7 +29,9 @@
                     <div class="col-sm mb-3">
                         <div class="row">
                             <div class="sm-6">
-                                <h4 style="color:green" class="float-right"> Valor total inventario: <span>{{ $total }}</span></h4>
+                                <h4 style="color:green" class="float-right"> Valor total inventario:
+                                    <span>{{ $total }}</span>
+                                </h4>
                             </div>
                         </div>
 
@@ -52,6 +54,8 @@
                                     <th scope="col">Sexo</th>
                                     <th scope="col">Tercerizado</th>
                                     <th scope="col">Nombre Tercero</th>
+                                    <th scope="col">Peso</th>
+                                    <th scope="col">Valor</th>
                                     <th scope="col">Estado</th>
                                     <th scope="col">Operaciones</th>
                                 </tr>
@@ -89,6 +93,20 @@
                                                 No aplica.
                                             @endif
                                         </td>
+                                        <th>
+                                            @if ($d->peso != null)
+                                                {{ $d->peso }} KG
+                                            @else
+                                                Sin peso registrado
+                                            @endif
+                                        </th>
+                                        <th>
+                                            @if ($d->valor != null)
+                                                {{ $d->valor }} Pesos
+                                            @else
+                                                Sin valor registrado
+                                            @endif
+                                        </th>
                                         <td>
                                             @if ($d->state == 1)
                                                 Activo
@@ -101,13 +119,15 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($d->state == 0)
-                                                <span class="badge badge-danger">No se puede modificar el dato</span>
-                                                 <a href="{{ route('peso.show', 0) }}" class="btn btn-sm btn-warning">Pesaje y Valor</a>
+                                            @if ($d->state != 1)
+                                                <span class="badge badge-danger">No se puede modificar este animal</span>
+                                                <a href="{{ route('peso.show', 0) }}"
+                                                    class="btn btn-sm btn-warning">Pesaje y Valor</a>
                                             @else
                                                 <a href="{{ route('inventario.edit', $d->id) }}"
                                                     class="btn btn-primary">Editar</a>
-                                                <a href="{{ route('peso.show', $d->id) }}" class="btn btn-sm btn-warning">Pesaje y Valor</a>
+                                                <a href="{{ route('peso.show', $d->id) }}"
+                                                    class="btn btn-sm btn-warning">Pesaje y Valor</a>
                                             @endif
                                         </td>
                                     </tr>
@@ -152,7 +172,6 @@
                 }
             }
         });
-
     </script>
 
     @if (session('created') == 'ok')
@@ -165,7 +184,6 @@
                 showConfirmButton: false,
                 timer: 3000
             })
-
         </script>
     @endif
 
@@ -178,7 +196,6 @@
                 showConfirmButton: false,
                 timer: 3000
             })
-
         </script>
     @endif
 
@@ -191,7 +208,6 @@
                 showConfirmButton: false,
                 timer: 3000
             })
-
         </script>
     @endif
 
@@ -204,7 +220,6 @@
                 showConfirmButton: false,
                 timer: 3000
             })
-
         </script>
     @endif
 
@@ -222,7 +237,6 @@
                 });
             }
         });
-
     </script>
 
     <script>
@@ -238,7 +252,6 @@
                 });
             }
         });
-
     </script>
 
 @endsection

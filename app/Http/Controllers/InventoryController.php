@@ -8,6 +8,7 @@ use App\Models\Peso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\Count;
 
 class InventoryController extends Controller
 {
@@ -30,14 +31,12 @@ class InventoryController extends Controller
     public function index()
     {
         $data = Inventory::all()->where('users_id', Auth()->user()->id);
-        #Suma del inventario
-        $total = DB::table('farms')
-                     ->join('inventories', 'farms.id','=', 'inventories.farms_id')
-                     ->join('pesos', 'inventories.id', '=', 'pesos.inventories_id')
-                     ->where('farms.users_id', Auth()->user()->id)
-                     ->where('inventories.state','1')
-                     ->sum('pesos.valor');
 
+        #Suma del inventario
+        $total = Inventory::all()->where('users_id', Auth()->user()->id)
+                               ->where('state',1)
+                               ->sum('valor');
+                               
         return view('inventory.index', compact('data', 'total'));
     }
 
