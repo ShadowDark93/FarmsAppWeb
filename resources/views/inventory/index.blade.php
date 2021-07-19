@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="sm-6">
                                 <h4 style="color:green" class="float-right"> Valor total inventario:
-                                    <span>{{ $total }}</span>
+                                    <span>$ {{ $total }}</span>
                                 </h4>
                             </div>
                         </div>
